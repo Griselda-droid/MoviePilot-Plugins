@@ -1215,7 +1215,8 @@ class SiteStatistic(_PluginBase):
                 downloads = [self._sites_data[site].get("download") or 0 if not yesterday_sites_data.get(site) else
                              (self._sites_data[site].get("download") or 0) - (
                                      yesterday_sites_data[site].get("download") or 0) for site in sites]
-                data_list = sorted(list(zip(sites, uploads, downloads)),
+                ratios = self._sites_data[site].get("ratio")
+                data_list = sorted(list(zip(sites, uploads, downloads, ratios)),
                                    key=lambda x: x[1],
                                    reverse=True)
                 # 总上传
@@ -1226,23 +1227,20 @@ class SiteStatistic(_PluginBase):
                     site = data[0]
                     upload = int(data[1])
                     download = int(data[2])
+                    ratio = int(data[3])
                     if upload > 0 or download > 0:
                         incUploads += int(upload)
                         incDownloads += int(download)
                         messages.append(f"【{site}】\n"
                                         f"上传量：{StringUtils.str_filesize(upload)}\n"
                                         f"下载量：{StringUtils.str_filesize(download)}\n"
+                                        f"分享率：{ratio}\n"
                                         f"————————————")
 
                 if incDownloads or incUploads:
-                    if incUploads != 0:
-                        share_ratio = incDownloads / incUploads
-                    else:
-                        share_ratio = 0  # 避免除以零错误
                     messages.insert(0, f"【汇总】\n"
                                        f"总上传：{StringUtils.str_filesize(incUploads)}\n"
                                        f"总下载：{StringUtils.str_filesize(incDownloads)}\n"
-                                       f"分享率：{share_ratio:.2f}\n"
                                        f"————————————")
                     self.post_message(mtype=NotificationType.SiteMessage,
                                       title="站点数据统计", text="\n".join(messages))
