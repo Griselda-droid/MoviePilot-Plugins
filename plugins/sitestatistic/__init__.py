@@ -37,9 +37,9 @@ lock = Lock()
 
 class SiteStatistic(_PluginBase):
     # 插件名称
-    plugin_name = "站点数据统计"
+    plugin_name = "自用站点数据统计"
     # 插件描述
-    plugin_desc = "自动统计和展示站点数据。"
+    plugin_desc = "自用自动统计和展示站点数据。"
     # 插件图标
     plugin_icon = "statistic.png"
     # 插件版本
@@ -1235,9 +1235,14 @@ class SiteStatistic(_PluginBase):
                                         f"————————————")
 
                 if incDownloads or incUploads:
+                    if incUploads != 0:
+                        share_ratio = incDownloads / incUploads
+                    else:
+                        share_ratio = 0  # 避免除以零错误
                     messages.insert(0, f"【汇总】\n"
                                        f"总上传：{StringUtils.str_filesize(incUploads)}\n"
                                        f"总下载：{StringUtils.str_filesize(incDownloads)}\n"
+                                       f"分享率：{share_ratio:.2f}\n"
                                        f"————————————")
                     self.post_message(mtype=NotificationType.SiteMessage,
                                       title="站点数据统计", text="\n".join(messages))
