@@ -43,7 +43,7 @@ class SiteStatistic(_PluginBase):
     # 插件图标
     plugin_icon = "statistic.png"
     # 插件版本
-    plugin_version = "1.6"
+    plugin_version = "1.7"
     # 插件作者
     plugin_author = "Griselda-droid"
     # 作者主页
@@ -1215,7 +1215,8 @@ class SiteStatistic(_PluginBase):
                 downloads = [self._sites_data[site].get("download") or 0 if not yesterday_sites_data.get(site) else
                              (self._sites_data[site].get("download") or 0) - (
                                      yesterday_sites_data[site].get("download") or 0) for site in sites]
-                data_list = sorted(list(zip(sites, uploads, downloads)),
+                ratios = [self._sites_data[site].get("ratio") or 0 for site in sites]  # 获取分享率数据
+                data_list = sorted(list(zip(sites, uploads, downloads, ratios)),
                                    key=lambda x: x[1],
                                    reverse=True)
                 # 总上传
@@ -1226,13 +1227,10 @@ class SiteStatistic(_PluginBase):
                     site = data[0]
                     upload = int(data[1])
                     download = int(data[2])
+                    share_ratio = data[3]
                     if upload > 0 or download > 0:
                         incUploads += int(upload)
                         incDownloads += int(download)
-                        if incDownloads == 0:
-                            share_ratio = "∞"
-                        else:
-                            share_ratio = round(incUploads / incDownloads, 2)
                         messages.append(f"【{site}】\n"
                                         f"上传量：{StringUtils.str_filesize(upload)}\n"
                                         f"下载量：{StringUtils.str_filesize(download)}\n"
