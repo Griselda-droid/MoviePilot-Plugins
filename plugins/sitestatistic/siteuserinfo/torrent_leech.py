@@ -4,7 +4,7 @@ from typing import Optional
 
 from lxml import etree
 
-from app.plugins.sitestatistic.siteuserinfo import ISiteUserInfo, SITE_BASE_ORDER, SiteSchema
+from app.plugins.sitestatistic2.siteuserinfo import ISiteUserInfo, SITE_BASE_ORDER, SiteSchema
 from app.utils.string import StringUtils
 
 

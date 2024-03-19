@@ -23,7 +23,7 @@ from app.helper.module import ModuleHelper
 from app.helper.sites import SitesHelper
 from app.log import logger
 from app.plugins import _PluginBase
-from app.plugins.sitestatistic.siteuserinfo import ISiteUserInfo
+from app.plugins.sitestatistic2.siteuserinfo import ISiteUserInfo
 from app.schemas.types import EventType, NotificationType
 from app.utils.http import RequestUtils
 from app.utils.object import ObjectUtils
@@ -35,7 +35,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 lock = Lock()
 
 
-class SiteStatistic(_PluginBase):
+class SiteStatistic2(_PluginBase):
     # 插件名称
     plugin_name = "自用站点数据统计"
     # 插件描述
@@ -49,7 +49,7 @@ class SiteStatistic(_PluginBase):
     # 作者主页
     author_url = "https://github.com/lightolly"
     # 插件配置项ID前缀
-    plugin_config_prefix = "sitestatistic_"
+    plugin_config_prefix = "sitestatistic2_"
     # 加载顺序
     plugin_order = 1
     # 可使用的用户级别
@@ -96,7 +96,7 @@ class SiteStatistic(_PluginBase):
 
         if self._enabled or self._onlyonce:
             # 加载模块
-            self._site_schema = ModuleHelper.load('app.plugins.sitestatistic.siteuserinfo',
+            self._site_schema = ModuleHelper.load('app.plugins.sitestatistic2.siteuserinfo',
                                                   filter_func=lambda _, obj: hasattr(obj, 'schema'))
 
             # 定时服务
