@@ -6,5 +6,13 @@
         "icon": "statistic.png",
         "author": "Griselda-droid",
         "level": 2
+    },
+    "doubandy": {
+        "name": "自用豆瓣榜单订阅",
+        "description": "监控豆瓣热门榜单，自动添加订阅。",
+        "version": "1.7",
+        "icon": "statistic.png",
+        "author": "Griselda-droid",
+        "level": 2
     }
 }
