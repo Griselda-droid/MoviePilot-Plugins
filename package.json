@@ -1,12 +1,4 @@
 {
-    "SiteStatistic2": {
-        "name": "自建站点数据统计",
-        "description": "自建自动统计和展示站点数据。",
-        "version": "1.7",
-        "icon": "statistic.png",
-        "author": "Griselda-droid",
-        "level": 2
-    },
     "LibraryScraper22": {
         "name": "自用自用媒体库刮削",
         "description": "定时对媒体库进行刮削，补齐缺失元数据和图片。",

@@ -93,7 +93,7 @@ class doubandy(_PluginBase):
         if self._enabled or self._onlyonce:
             if self._onlyonce:
                 self._scheduler = BackgroundScheduler(timezone=settings.TZ)
-                logger.info("豆瓣榜单订阅服务启动，立即运行一次")
+                logger.info("自用豆瓣榜单订阅服务启动，立即运行一次")
                 self._scheduler.add_job(func=self.__refresh_rss, trigger='date',
                                         run_date=datetime.datetime.now(
                                             tz=pytz.timezone(settings.TZ)) + datetime.timedelta(seconds=3)
@@ -139,7 +139,7 @@ class doubandy(_PluginBase):
             return [
                 {
                     "id": "doubandy",
-                    "name": "豆瓣榜单订阅服务",
+                    "name": "自用豆瓣榜单订阅服务",
                     "trigger": CronTrigger.from_crontab(self._cron),
                     "func": self.__refresh_rss,
                     "kwargs": {}
@@ -149,7 +149,7 @@ class doubandy(_PluginBase):
             return [
                 {
                     "id": "doubandy",
-                    "name": "豆瓣榜单订阅服务",
+                    "name": "自用豆瓣榜单订阅服务",
                     "trigger": CronTrigger.from_crontab("0 8 * * *"),
                     "func": self.__refresh_rss,
                     "kwargs": {}
